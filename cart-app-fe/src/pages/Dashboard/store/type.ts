@@ -1,0 +1,7 @@
+export const dashboardTypes = {
+  GET_PRODUCTS: "GET_PRODUCTS",
+  ADD_TO_CART: "ADD_TO_CART",
+  GET_CART: "GET_CART",
+  DELETE_FROM_CART: "DELETE_FROM_CART",
+  CHECK_COUPON: "CHECK_COUPON" as const,
+};
