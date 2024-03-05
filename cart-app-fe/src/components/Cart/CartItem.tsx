@@ -9,12 +9,15 @@ import {
 import React from "react";
 import { useDispatch } from "react-redux";
 import { dashboardTypes } from "../../pages/Dashboard/store/type";
+import { useAppSelector } from "../../redux/store";
 
 const CartItem = ({
+  index,
   item,
   quantity,
   isFree = false,
 }: {
+  index: number;
   item: {
     product: {
       id: number;
@@ -27,6 +30,7 @@ const CartItem = ({
   isFree?: boolean;
 }) => {
   const dispatch = useDispatch();
+  const cart = useAppSelector((state) => state.dashboardSlice.cart);
   return (
     <>
       <ListItem alignItems="center">
@@ -83,7 +87,7 @@ const CartItem = ({
             >
               +
             </Button>
-            <Typography variant="body2">x{quantity}</Typography>
+            <Typography variant="body2">x{cart[index].quantity}</Typography>
           </Box>
         )}
       </ListItem>

@@ -128,25 +128,29 @@ const Cart = ({
             const isCouponProduct =
               couponSlice.discountType === "buyoneandgetonefree" &&
               item.product.name === couponSlice.discountValue;
-            const freeQuantity =
-              couponSlice &&
-              couponSlice?.discountType === "buyoneandgetonefree" &&
-              item.quantity >= 2
-                ? 1
-                : 0;
+
+            const freeQuantity = isCouponProduct
+              ? Math.floor(item.quantity / 2)
+              : 0;
             const paidQuantity = item.quantity - freeQuantity;
 
             return (
               <>
                 {isCouponProduct && freeQuantity > 0 && (
                   <CartItem
-                    key={index}
+                    index={index}
+                    key={`${index}-free`}
                     item={item}
                     quantity={freeQuantity}
                     isFree
                   />
                 )}
-                <CartItem key={index} item={item} quantity={paidQuantity} />
+                <CartItem
+                  index={index}
+                  key={index}
+                  item={item}
+                  quantity={paidQuantity}
+                />
               </>
             );
           })
